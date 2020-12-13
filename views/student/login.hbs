@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="container mt-5   ">
+        <div style="width:30rem" class="container mt-2 pl-0 ">
+             
+
+
+            <h2 class="text-center"> Login </h2>
+            
+            <form action="" method="POST">
+            {{#if logginErr}}
+            <p style="color: red;">inavlid user name or password</p>
+
+            {{/if}}
+
+               
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="text" class="form-control" name="phone" id="phoneNum"  placeholder="Enter the bumber">
+
+                </div>
+                
+                {{!-- <a href="">Create a new account</a> --}}
+                <a  class="btn btn-lg btn-success text-light" onclick="generateOtp()">Get OTP </a>
+
+                 <div id="confirm" style="display: none;" class="col-9 alert alert-success ">OTP has sended to you
+                        number</div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    let generateOtp =function(){
+    let num = document.getElementById('phoneNum').value
+     let confirm = document.getElementById('confirm')
+    console.log(num)
+    $.ajax({
+       url: '/student/otp-send',
+      method: 'post',
+     data:{phone:num},
+     success:(response)=>{
+         
+          if (response.status) {
+                    console.log('otp generted ' + num)
+                   
+                    confirm.style.display = 'block';
+                    
+                    var otp = prompt("Please enter OTP");
+                    
+                    if (otp == null || otp == "") {
+                        alert('you have cancelled activation')
+                        location.reload()
+                    } else {
+                        verifyOtp(otp)
+                    }
+                }else{
+                    alert('your numbr not registerd by the user')
+                }
+         
+     }
+         
+      
+    })
+
+}
+ let verifyOtp = function (otp){
+      let num = document.getElementById('phoneNum').value
+        
+        $.ajax({
+            url:'/student/verify-otp',
+            method:'post',
+            data:{ num:num,otp:otp
+           },
+            success:(response)=>{
+                if(response.status === 'approved'){
+                     location.href = '/student/student-home'
+                   
+                    
+                }else{
+                    alert(response.status,' : ', response.error)
+                }
+            }
+        })
+    }
+
+
+</script>
+ 

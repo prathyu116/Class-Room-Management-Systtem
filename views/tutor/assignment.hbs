@@ -1,0 +1,158 @@
+<header>
+
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3> <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR </h3>
+            </div>
+
+            <ul class="aside list-unstyled components">
+
+                <li>
+                    <a href="/tutor/tutor-home/profile">Profile</a>
+
+
+                </li>
+                <li>
+                    <a href="#">Students</a>
+                </li>
+                <li>
+                    <a href="#">Attendance</a>
+                </li>
+                <li>
+                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
+                </li>
+                <li>
+                    <a href="#">Notes</a>
+                </li>
+                <li>
+                    <a href="#">Announcement</a>
+                </li>
+                <li>
+                    <a href="#">Event</a>
+                </li>
+                <li>
+                    <a href="#">Photo</a>
+                </li>
+            </ul>
+
+
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class=" nav navbar-nav ml-auto ">
+                            {{#if user}}
+                            <li class="link nav-item active">
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger"
+                                    href="/tutor/logout" style="color: black;font-size:20px"
+                                    onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
+
+                                {{/if}}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <section>
+
+<h1>Assignments</h1>
+===============
+ <div class="container mt-0 ">
+     <div class="row ">
+        <a href="/tutor/tutor-home/assignment/add-assignment" class="btn btn-success ml-auto mr-5 mt-3  ">Add Assignment</a>
+    </div>
+ 
+                    
+                <table  class="table mt-5 align-middle" id="productsTable">
+  <thead style="    background-color: teal; padding:100px 0">
+    <tr>
+{{!-- <th s      cope="col">NO</th> --}}
+    
+      {{!-- <th scope="col">Actions</th> --}}
+     <th>Topic</th>
+      <th>File</th>
+      <th>Delete</th>
+     
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each topics}}
+    <tr>
+     
+      <td>{{this.Topic}}</td>
+       {{!-- <td> <embed src="/tutor-imags/{{this._id}}.pdf" type=""></td> --}}
+       {{!-- <td><img style="height: 50px;width:60px" src="/tutor-imags/{{this._id}}.jpg" alt="" srcset=""></td> --}}
+      
+     <td><a style="color: blue;" href="/tutor-imags/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+    
+     
+      <td>
+      
+
+        <a href="/tutor/delete-assignment/{{this._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a>
+
+      
+    </tr>
+     {{/each }}
+    
+    
+  </tbody>
+</table>
+ 
+</section>
+
+
+
+        </div>
+    </div>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</header>
+
+<style>
+    section {
+        background-repeat: no-repeat;
+    }
+</style>
+
