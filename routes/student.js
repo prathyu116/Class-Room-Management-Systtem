@@ -9,15 +9,18 @@ const twilio=require('twilio')(accountSID,authToken)
 
 
 router.get('/login', function(req, res, next) {
-  // let student = req.session.student;
-  if(req.session.loggIn){
-    res.redirect("http://localhost:3000/student/student-home");
+  if(req.session.loggedIn){
+    res.redirect('http://localhost:3000/student/student-home')
+  }else{
+    res.render('student/login',{'logginErr':req.session.logginErr});
+    req.session.logginErr=false
 
   }
-  else{
-    res.render('student/login',{'logginErr':req.session.loggErr});
-    req.session.loggErr=false
-  }
+ 
+  
+   
+  
+  
   
   
   
@@ -34,6 +37,8 @@ router.post('/otp-send',(req,res)=>{
     // console.log(true);
     console.log(data);
     res.json({status:true})
+  }).catch(()=>{
+    res.json({status:false})
   })
 
 })
@@ -42,35 +47,57 @@ router.post('/verify-otp',(req,res)=>{
   console.log('#####################api cal+++++++++++++++++++');
   studentHelper.verifyOtp( req.body.num, req.body.otp).then((response)=>{
     console.log('--------------',response.status);
+    
     if (response.status === 'approved'){
-      req.session.loggedIn = true;
-      req.session.student = response1.student;
-      let student = req.session.student;
-      console.log(student);
-      console.log('otp is approved');
-      // res.json(true)
-      //  res.redirect("/student/student-home");  
-    }
-    // else{
-    //   req.session.logginErr=true
-    //   // res.json({status:false})
-      
-    //   // res.redirect("/student/login");
+      studentHelper.getEachStudents(req.body.num).then((response)=>{
+        if(response.status){
+         
+          req.session.student = response.student;
+          req.session.loggedIn = true;
+          let student = req.session.student;
+          console.log(req.session);
+          console.log( student);
+          console.log('otp is approved');
+        //  res.re("/student/student-home");
+        //  res.redirect("http://localhost:3000/student/student-home");
 
+
+        } else{
+            req.session.logginErr=true
+            // res.json({status:false})
+            
+         
       
-    // }
-    res.json(response)
+            
+          }
+       
+        res.json({status:true})
+
+      }).catch(()=>{
+        res.json({status:false})
+      })
+    
+     
+    }else{
+      res.json({status:false})
+    }
+   
+   
+    // 
+   
   
   })
 
 })
 router.get('/student-home',(req,res)=>{
   let student = req.session.student;
+  console.log(req.session);
+  console.log('00000000000',student);
   res.render("student/student-home",{student});
 
 })
-router.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.redirect("/student/login");
-});
+// router.get("/logout", (req, res) => {
+//   req.session.destroy();
+//   res.redirect("/student/login");
+// });
 module.exports = router;

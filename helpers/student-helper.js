@@ -15,9 +15,9 @@ module.exports={
         
       
 
-        return new Promise((resolve, reject) => {
-            // let phones=db.get().collection(collection.STUDENT_COLLECTION).findOne({Phone:phone})
-           
+        return new Promise(async(resolve, reject) => {
+            let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ Phone: phone });
+            if (!student) reject()
                 twilio.verify.services(serviceId).verifications.create({
                     to:"+91"+phone,
                    
@@ -27,9 +27,10 @@ module.exports={
                       resolve(data)
                    
                     
-                  }).catch((error)=>{
-                      reject(error)
                   })
+                //   .catch((error)=>{
+                //     reject(error)
+                // })
                
 
                 
@@ -40,39 +41,56 @@ module.exports={
     },
     verifyOtp:(number, otp)=>{
         let loginStatus = false;
-    let response1 = {};
+   
         return new Promise(async(resolve, reject) => {
-            let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ Phone: number });
-            if(student){
+            // let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ Phone: number });
+            // if (!student) reject()
+            
                 twilio.verify.services(serviceId).verificationChecks.create({
                     to:"+91"+number,
                     code:otp
                   }).then((verification_checks)=>{
                       console.log(verification_checks);
                       if(verification_checks.valid){
-                        response1.student = student;
-                        response1.status=true
+                       
                        
                  
                           resolve(verification_checks)
                       }else{
-                        console.log("logine failed - otp incorrect");
-                        resolve({ status: false });
-    
+                          console.log('incorrect otp');
+                          resolve({status:false})
                       }
-                   
+                      
                     
                     });
              
 
-            }else{
-                console.log("logine failed -  tutor not register the number");
-                resolve({ status: false });
-            }
-
+            
            
         })
         
+    },
+    getEachStudents:(number)=>{
+        let response = {};
+
+        return new Promise(async(resolve,reject)=>{
+          let student = await db.get().collection(collection.STUDENT_COLLECTION).findOne({ Phone: number })
+          if(student){
+           
+            db.get().collection(collection.STUDENT_COLLECTION).findOne({ Phone: number })
+            .then((status)=>{
+                if (status) {
+                    response.student = student;
+                    response.status = true;
+                    resolve(response);
+
+                }
+               
+              })
+          }
+         
+    
+        })
     }
     
     

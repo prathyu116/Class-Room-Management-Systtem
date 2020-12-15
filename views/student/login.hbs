@@ -56,7 +56,8 @@
                         verifyOtp(otp)
                     }
                 }else{
-                    alert('your numbr not registerd by the user')
+                    alert('your numbr not registerd by the tutor')
+                     location.reload()
                 }
          
      }
@@ -74,12 +75,12 @@
             data:{ num:num,otp:otp
            },
             success:(response)=>{
-                if(response.status === 'approved'){
+                if(response.status){
                      location.href = '/student/student-home'
                    
                     
                 }else{
-                    alert(response.status,' : ', response.error)
+                    alert('Soryy You Entered Wrong Otp')
                 }
             }
         })
