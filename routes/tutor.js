@@ -1,5 +1,6 @@
 const { response } = require("express");
 var express = require("express");
+const studentHelper = require("../helpers/student-helper");
 var router = express.Router();
 var tutorHelper = require("../helpers/tutor-helper");
 // const varifyLogin=(req,res,next)=>{
@@ -157,9 +158,16 @@ router.get('/tutor-home/students',async(req,res)=>{
   router.get('/view-each-stusent/:id',(req,res)=>{
     let user = req.session.user;
     console.log(req.body);
-  tutorHelper.getEachStudents(req.params.id).then((students)=>{
-    console.log(students);
-    res.render('tutor/view-each-stusent',{user,tutor:true,students})
+    studentId=req.params.id
+  tutorHelper.getEachStudents(studentId).then((students)=>{
+    studentHelper.getSubmitAssignment(studentId).then((subassignment)=>{
+
+      console.log(students);
+      console.log('ppppppppppppppppppppppppppppppppppppppppppppppppppp',subassignment);
+
+    res.render('tutor/view-each-stusent',{user,tutor:true,students,subassignment})
+    })
+    
 
   })
 })
@@ -223,28 +231,59 @@ router.get('/tutor-home/students',async(req,res)=>{
     res.redirect('/tutor/tutor-home/assignment')
   })
 })
+router.get('/tutor-home/notes',(req,res)=>{
+  let user = req.session.user;
+  
+  tutorHelper.getNotes().then((notes)=>{
+    console.log(notes);
+    res.render('tutor/notes',{tutor:true,user,notes})
+ 
+
+ 
+    
+  })
+  
+  
+ 
+})
+router.get('/tutor-home/notes/add-notes',(req,res)=>{
+  let user = req.session.user;
+  // let profile=await tutorHelper.getProfileDetails(req.params.id)
+  // console.log(profile);
+  res.render('tutor/add-notes',{tutor:true,user})
+})
+router.post('/tutor-home/notes/add-notes',(req,res)=>{
+  console.log(req.body)
+ console.log(req.files.Image) //just console il imgum aa contentum varan
+ tutorHelper.addNotes(req.body,(id)=>{
+
+   console.log(req.body)
+   // let Price=parseInt(products.Price)
+   let image=req.files.Image;
+   image.mv('./public/tutor-notes/'+id+'.pdf',(err,done)=>{ //, move cheyth kainjal
+     if (!err){
+      res.redirect('http://localhost:3000/tutor/tutor-home/notes')
+
+     }
+     else{
+       console.log(err)
+     }
+     
+   })
+ 
+ })
+})
+router.get('/delete-notes/:id',(req,res)=>{
+  let user = req.session.user;
+  let notesId=req.params.id
+  console.log(notesId);
+  tutorHelper.deleteNotes(notesId).then((response)=>{
+    res.redirect('/tutor/tutor-home/notes')
+  })
+})
+
 
 module.exports = router;
 
-// outer.post('/tutor-home/profile/edit-profile/:id',(req,res)=>{
-//   console.log(req.params.id);
-//   console.log(req.body);
-//   console.log(req.files.Image);
-//   tutorHelper.updateProfile(req.params.id,req.body).then((response)=>{
-//     let Image=req.files.Image
-//     Image.mv('./public/tutor-imags/'+req.params.id+'.jpg',(err,done)=>{ //, move cheyth kainjal
-//       if (!err){
-//         res.render('admin/add-product')
 
-//       }
-//       else{
-//         console.log(err)
-//       }
-      
-//     })
-//    console.log(response);
-//     res.redirect("/tutor/tutor-home/profile");
-//     // res.send('hiiiiiiii')
-    
-//   })
 

@@ -9,36 +9,37 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar"  > 
             <div class="sidebar-header" >
-                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR  </h3>
+                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi STUDENT  </h3>
             </div>
 
             <ul class="aside list-unstyled components">
                
+              
                 <li>
-                    <a href="/tutor/tutor-home/profile">Profile</a>
-                   
-                   
+                    <a href="">Home</a>
+
                 </li>
-                <li>
-                    <a href="/tutor/tutor-home/students">Students</a>
+                 <li>
+                    <a href="#">Today Task</a>
                 </li>
                 <li>
                     <a href="#">Attendance</a>
                 </li>
                 <li>
-                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
-                </li>
-                <li>
-                    <a href="/tutor/tutor-home/notes">Notes</a>
+                    <a href='/student/student-home/assignment'>Assignment</a>
                 </li>
                 <li>
                     <a href="#">Announcement</a>
                 </li>
-                <li>
-                    <a href="#">Event</a>
+               
+                 <li>
+                    <a href="#">Notes</a>
                 </li>
                 <li>
-                    <a href="#">Photo</a>
+                 <li>
+                    <a href="">Profile</a>
+                   
+                   
                 </li>
             </ul>
 
@@ -61,9 +62,10 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class=" nav navbar-nav ml-auto ">
-                              {{#if user}}
+                              {{#if student}}
+                               <h1>{{student.Name}}</h1>
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/tutor/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
                                
                             {{/if}}
                             </li>
@@ -72,11 +74,51 @@
                     </div>
                 </div>
             </nav>
+           
+           
 
-      {{!-- <section >
+      <section >
+      <h4>Student Assignments</h4>
+      <div class="container mt-0 ">
+     <div class="row ">
+        <a href="/student/student-home/assignment/submit-assignment" class="btn btn-success ml-auto mr-5 mt-3  ">Submit Your Assignment</a>
+    </div>
+<table  class="table mt-5 align-middle" id="productsTable">
+  <thead style="    background-color: teal; padding:100px 0">
+    <tr>
+{{!-- <th s      cope="col">NO</th> --}}
+    
+      {{!-- <th scope="col">Actions</th> --}}
+     <th>Topic</th>
+      <th>File</th>
+     
+     
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each topics}}
+    <tr>
+     
+      <td>{{this.Topic}}</td>
       
-{{{body}}}
-      </section> --}}
+      
+      <td><a style="color: blue;" href="/tutor-imags/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+    
+     
+      <td>
+      
+
+       
+
+      
+    </tr>
+     {{/each }}
+    
+    
+  </tbody>
+</table>
+      </section>
 
             
         </div>

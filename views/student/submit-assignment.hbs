@@ -1,5 +1,7 @@
  {{!-- {{>tutor-header}}  --}}
  
+    
+
 
 
 <header>
@@ -28,8 +30,9 @@
                 <li>
                     <a href='/student/student-home/assignment'>Assignment</a>
                 </li>
-               
-                   
+                <li>
+                    <a href="#">Announcement</a>
+                </li>
                
                  <li>
                     <a href="/student/student-home/notes">Notes</a>
@@ -64,7 +67,7 @@
                               {{#if student}}
                                <h1>{{student.Name}}</h1>
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">{{student.Name}}</a>
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
                                
                             {{/if}}
                             </li>
@@ -76,7 +79,49 @@
            
            
 
+      <section >
+          <div class="row">
+                        <div class="col-md-6">
+                           
+                            <form action="/student/student-home/assignment/submit-assignment" method="POST" enctype="multipart/form-data">
+                               {{#if student}}
+                            <input type="text" name="studId" value="{{student._id}}">
+                              {{/if}}
+                                {{!-- enctype="multipart/form-data"> --}}
+                                <label for="">Topic:</label>
+                                <input type="text" class="form-control" name="Topic" value="">
+                               <br><br>
+
+{{!--                               
+                                <label for="">file:</label>
+                                <input type="file" class="form-control" name="File"  > --}}
+                               
+
+
+                   
+                               <label for="">File:</label><br>
+
+                            <div class="container">
+      <div class="button-wrap">
+          
+        <label class="button" for="upload">Upload File</label>
+        <input id="upload" type="file" name="Image">
+      </div>
+    </div>
+<br><br>
+
+                                <button type="submit" class="btn btn-success mt-5">Save</button>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+
      
+      </section>
+
             
         </div>
     </div>
@@ -105,7 +150,32 @@
     </header>
 
 <style>
-    section{
-        background-repeat: no-repeat;
-    }
+     .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+      }
+      input[type="file"] {
+        position: absolute;
+        z-index: -1;
+        top: 10px;
+        left: 10px;
+        font-size: 17px;
+        color: #28b1c4;
+      }
+      .button-wrap {
+        position: relative;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 18px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: #5d42bf;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        
+      }
 </style>

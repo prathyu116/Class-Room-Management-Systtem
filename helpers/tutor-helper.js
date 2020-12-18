@@ -186,5 +186,38 @@ module.exports = {
     })
    
 
-  }
+  },
+  getNotes:()=>
+
+  {
+    return new Promise(async(resolve,reject)=>{
+      let notes = await db.get().collection(collection.NOTES_COLLECTIONS).find().toArray();
+      resolve(notes);
+      console.log(notes);
+
+    })
+  },
+  addNotes:(notes,callback)=>{
+
+    db.get().collection(collection.NOTES_COLLECTIONS).insertOne(notes).then((data)=>{
+      // db.Price=parseInt(Price)
+      // console.log(Price)
+      // console.log(data.Price);
+
+      callback(data.ops[0]._id);
+
+  })
+  },
+  deleteNotes:(notesId)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection(collection.NOTES_COLLECTIONS).removeOne({_id:objectId(notesId)}).then((response)=>{
+        resolve(response)
+    })
+      
+
+
+    })
+   
+
+  },
 }

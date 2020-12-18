@@ -1,10 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var studentHelper=require('../helpers/student-helper')
+var tutorHelper = require("../helpers/tutor-helper");
+const varifyLogin=(req,res,next)=>{
+  if(req.session.loggedIn){
+    next()
+  }else{
+    res.redirect('http://localhost:3000/student/login')
+  }
+}
 
-var serviceId='VA677df19ccda8484f48a57b3d064f124a	';
-var accountSID='ACb4e558db93af0d4fabe6e699dc041613';
-var authToken='34a6b35bc1abeca0eb534092438cf0c9';
+var serviceId='	VA78fa3dfbf36775b72869ac68c098fb6d	';
+var accountSID='AC3f24b193be18c30011e153db7b47067e';
+var authToken='958b21c552bde19d8d13fb8def735708';
 const twilio=require('twilio')(accountSID,authToken)
 
 
@@ -96,8 +104,68 @@ router.get('/student-home',(req,res)=>{
   res.render("student/student-home",{student});
 
 })
-// router.get("/logout", (req, res) => {
-//   req.session.destroy();
-//   res.redirect("/student/login");
-// });
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/student/login");
+});
+router.get('/student-home/assignment',(req,res)=>{
+  let student = req.session.student;
+  tutorHelper.getAssignment().then((topics)=>{
+    console.log(topics);
+  
+  res.render('student/assignment',{student:true,student,topics})
+ 
+    
+  })
+  
+  
+  
+
+})
+router.get('/student-home/assignment/submit-assignment',(req,res)=>{
+  let student = req.session.student;
+  console.log(student);
+  // let profile=await tutorHelper.getProfileDetails(req.params.id)
+  // console.log(profile);
+  res.render('student/submit-assignment',{student:true,student})
+})
+router.post('/student-home/assignment/submit-assignment',(req,res)=>{
+  console.log(req.body)
+  // let studentId = req.session.student._id;
+  // console.log('++++++++++++++++++++++++++++++==',studentId);
+ console.log(req.files.Image) //just console il imgum aa contentum varan
+ studentHelper.submitAssignment(req.body,(id)=>{
+
+   console.log(req.body)
+   // let Price=parseInt(products.Price)
+   let image=req.files.Image;
+   image.mv('./public/assignment/'+id+'.pdf',(err,done)=>{ //, move cheyth kainjal
+     if (!err){
+      res.redirect('http://localhost:3000/student/student-home/assignment/submit-assignment')
+
+     }
+     else{
+       console.log(err)
+     }
+     
+   })
+ 
+ })
+})
+router.get('/student-home/notes',(req,res)=>{
+  let student = req.session.student;
+  tutorHelper.getNotes().then((notes)=>{
+    console.log(notes);
+  
+  res.render('student/notes',{student:true,student,notes})
+ 
+    
+  })
+  
+  
+  
+
+})
+
+
 module.exports = router;

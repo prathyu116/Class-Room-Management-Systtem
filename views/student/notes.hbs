@@ -28,11 +28,12 @@
                 <li>
                     <a href='/student/student-home/assignment'>Assignment</a>
                 </li>
-               
-                   
+                <li>
+                    <a href="#">Announcement</a>
+                </li>
                
                  <li>
-                    <a href="/student/student-home/notes">Notes</a>
+                    <a href="#">Notes</a>
                 </li>
                 <li>
                  <li>
@@ -64,7 +65,7 @@
                               {{#if student}}
                                <h1>{{student.Name}}</h1>
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">{{student.Name}}</a>
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
                                
                             {{/if}}
                             </li>
@@ -76,10 +77,62 @@
            
            
 
+      <section >
+      <h4>Student Notes</h4>
+
+<div class="input-icons"> 
+                <i class="fa fa-search icon"> 
+              </i> 
+               <input class="input-field" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for notes.." title="Type in a name">
+            </div> 
+
+      
+      
+      <div class="container mt-0 ">
+   
+<table  class="table mt-5 align-middle" id="myTable" >
+  <thead style="    background-color: teal; padding:100px 0">
+    <tr>
+{{!-- <th s      cope="col">NO</th> --}}
+    
+      {{!-- <th scope="col">Actions</th> --}}
+     <th>Topic</th>
+      <th>File</th>
      
+     
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each notes}}
+    <tr>
+     
+      <td>{{this.Topic}}</td>
+      
+      
+      <td><a style="color: blue;" href="/tutor-imags/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+    
+     
+      <td>
+      
+
+       
+
+      
+    </tr>
+     {{/each }}
+    
+    
+  </tbody>
+</table>
+      </section>
+
             
         </div>
     </div>
+    
+   
+    
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -93,19 +146,77 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
 
-
     <script type="text/javascript">
-        $(document).ready(function () {
+           $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
-        });
+        });  
+        
+    
+      function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+  
+
     </script>
+    
     </header>
 
 <style>
-    section{
-        background-repeat: no-repeat;
-    }
+    * {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('');
+  background-position: 10px 10px;
+   background-repeat: no-repeat;
+   margin: 0 100px;
+  position: center;
+  outline: 0;
+  width: 50%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+
+}
+.input-icons i { 
+            position: absolute; 
+        } 
+          
+        .input-icons { 
+            width: 100%; 
+            margin-bottom: 10px; 
+        } 
+          
+        .icon { 
+            padding: 15px; 
+            color: blue; 
+            min-width: 241px; 
+            text-align: center; 
+        } 
+          
+        .input-field { 
+            width: 50%; 
+            padding: 10px; 
+            text-align: left; 
+        } 
 </style>

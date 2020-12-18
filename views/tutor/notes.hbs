@@ -1,26 +1,22 @@
- {{!-- {{>tutor-header}}  --}}
- 
-
-
 <header>
 
 
-    <div class="wrapper" style="position: fixed;" >
+    <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar"  > 
-            <div class="sidebar-header" >
-                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR  </h3>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3> <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR </h3>
             </div>
 
             <ul class="aside list-unstyled components">
-               
+
                 <li>
                     <a href="/tutor/tutor-home/profile">Profile</a>
-                   
-                   
+
+
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/students">Students</a>
+                    <a href="#">Students</a>
                 </li>
                 <li>
                     <a href="#">Attendance</a>
@@ -42,12 +38,12 @@
                 </li>
             </ul>
 
-            
+
         </nav>
 
         <!-- Page Content Holder -->
-        <div id="content" >
-            
+        <div id="content">
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -57,15 +53,17 @@
                         <span></span>
                         <span></span>
                     </button>
-                   
+
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class=" nav navbar-nav ml-auto ">
-                              {{#if user}}
+                            {{#if user}}
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/tutor/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
-                               
-                            {{/if}}
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger"
+                                    href="/tutor/logout" style="color: black;font-size:20px"
+                                    onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
+
+                                {{/if}}
                             </li>
 
                         </ul>
@@ -73,12 +71,59 @@
                 </div>
             </nav>
 
-      {{!-- <section >
-      
-{{{body}}}
-      </section> --}}
 
-            
+
+            <section>
+
+<h1>Notes</h1>
+===============
+ <div class="container mt-0 ">
+     <div class="row ">
+        <a href="/tutor/tutor-home/notes/add-notes" class="btn btn-success ml-auto mr-5 mt-3  ">Add Notes</a>
+    </div>
+ 
+                    
+                <table  class="table mt-5 align-middle" id="productsTable">
+  <thead style="    background-color: teal; padding:100px 0">
+    <tr>
+{{!-- <th s      cope="col">NO</th> --}}
+    
+      {{!-- <th scope="col">Actions</th> --}}
+     <th>Topic</th>
+      <th>File</th>
+      <th>Delete</th>
+     
+
+    </tr>
+  </thead>
+  <tbody>
+      {{#each notes}}
+    <tr>
+     
+      <td>{{this.Topic}}</td>
+       {{!-- <td> <embed src="/tutor-imags/{{this._id}}.pdf" type=""></td> --}}
+       {{!-- <td><img style="height: 50px;width:60px" src="/tutor-imags/{{this._id}}.jpg" alt="" srcset=""></td> --}}
+      
+     <td><a style="color: blue;" href="/tutor-notes/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+    
+     
+      <td>
+      
+
+        <a href="/tutor/delete-notes/{{this._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a>
+
+      
+    </tr>
+     {{/each }}
+    
+    
+  </tbody>
+</table>
+ 
+</section>
+
+
+
         </div>
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -103,10 +148,11 @@
             });
         });
     </script>
-    </header>
+</header>
 
 <style>
-    section{
+    section {
         background-repeat: no-repeat;
     }
 </style>
+
