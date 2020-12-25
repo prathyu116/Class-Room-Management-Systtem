@@ -4,6 +4,7 @@ module.exports={
     STUDENT_COLLECTION:'student',
     ASSIGNMENT_TOPIC:'assignments',
     SUBMITTED_ASSIGNMENT:'stassignments',
-    NOTES_COLLECTIONS:'notes'
+    NOTES_COLLECTIONS:'notes',
+    ANNOUNCEMENT:'announcement'
 }
 //      <th>Photo</th>

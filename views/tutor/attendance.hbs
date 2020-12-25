@@ -1,11 +1,11 @@
- {{!-- {{>tutor-header}}  --}}
- 
+
+
 
 
 <header>
 
 
-    <div class="wrapper" style="position: fixed;" >
+    <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar"  > 
             <div class="sidebar-header" >
@@ -20,21 +20,21 @@
                    
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/students">Students</a>
+                    <a href="#">Students</a>
                 </li>
                 <li>
                     <a href="#">Attendance</a>
                 </li>
                 <li>
-                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
+                    <a href="#">Assignments</a>
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/notes">Notes</a>
+                    <a href="#">Notes</a>
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/announcement">Announcement</a>
+                    <a href="#">Announcement</a>
                 </li>
-                <li>
+                  <li>
                     <a href="/tutor/tutor-home/attendance">Attendance</a>
                 </li>
                 <li>
@@ -76,17 +76,71 @@
                 </div>
             </nav>
 
-      <section >
-          <h1>Announcement</h1>
-          ======================
-        {{#each announcement}}
-  		<p>{{this.Description}}</p>
+     
+      
+<section>
+   
+    <div class="container">
+        <table class="table mt-5" id="productsTable" style="text-align: center;">
+  <thead style="    background-color: teal;">
+    <tr>
+{{!-- <th s      cope="col">NO</th> --}}
+    
+      {{!-- <th scope="col">Actions</th> --}}
+       <th >Rollno</th>
+     <th>Name</th>
+      {{!-- <th>Gender</th> --}}
+     
+ 
+     {{!-- <th>Date Of Birth</th>
+         <th>Phone</th>
+     <th>E-mail</th> --}}
+     <th >Attendance</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each students}}   
+    <tr>
+         
         
-		  {{/each}}
 
-      </section>
+         <td>{{this.Name}}</td>
+         <td>{{this.Rollno}}</td>
+        {{/each}}
+     
+     
+      
 
-            
+      {{#each presentstudent}}
+      <td>
+     
+{{this.presentstudent}}
+ 
+      </td> 
+     
+       {{/each}}
+        
+    </tr>
+   
+    
+    
+  </tbody>
+</table>
+    </div>
+</section>
+{{!-- <script>
+  $(document).ready( function () {
+    $('#productsTable').DataTable();
+} );
+</script> --}}
+{{!-- <script>
+  $(document).ready( function () {
+    $('#productsTable').DataTable();
+} );
+</script> --}}
+     
+
+          
         </div>
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -109,12 +163,10 @@
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
-        });
+            
+      
     </script>
     </header>
 
-<style>
-    section{
-        background-repeat: no-repeat;
-    }
-</style>
+
+

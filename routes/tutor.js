@@ -1,4 +1,3 @@
-const { response } = require("express");
 var express = require("express");
 const studentHelper = require("../helpers/student-helper");
 var router = express.Router();
@@ -37,7 +36,11 @@ router.get("/login", function (req, res) {
 router.get('/tutor-home',(req,res)=>{
   let user = req.session.user;
   console.log(user);
-  res.render("tutor/tutor-home", { user,tutor:true });
+  tutorHelper.getAnnouncement().then((announcement)=>{
+    res.render("tutor/tutor-home", { user,tutor:true,announcement });
+
+  })
+ 
 
 })
 
@@ -91,7 +94,7 @@ router.post('/tutor-home/profile/edit-profile/:id',(req,res)=>{
   console.log(req.files.Image);
   tutorHelper.updateProfile(req.params.id,req.body).then((response)=>{
     let Image=req.files.Image
-    Image.mv('./public/tutor-imags/'+req.params.id+'.jpg',(err,done)=>{ //, move cheyth kainjal
+    Image.mv('./public/tutor-imags/'+req.params.id+'.jpg',(err)=>{ //, move cheyth kainjal
       if (!err){
         res.render('admin/add-product')
 
@@ -110,10 +113,6 @@ router.post('/tutor-home/profile/edit-profile/:id',(req,res)=>{
 })
 router.get('/tutor-home/students',async(req,res)=>{
   let user = req.session.user;
- let students=await tutorHelper.getAllStudent(req.params.id).then((students)=>{
-    res.render('tutor/view-students',{user,tutor:true,students})
-
-  })
   
 
 })
@@ -124,7 +123,6 @@ router.get('/tutor-home/students',async(req,res)=>{
     res.render('tutor/add-students',{tutor:true})
   })
   router.post('/tutor-home/students/add-students',(req,res)=>{
-    let user = req.session.user;
    
     console.log(req.body);
     tutorHelper.addStudents(req.body).then((response)=>{
@@ -173,10 +171,9 @@ router.get('/tutor-home/students',async(req,res)=>{
 })
   
   router.get('/delete-product/:id',(req,res)=>{
-    let user = req.session.user;
     let proId=req.params.id
     console.log(proId);
-    tutorHelper.deleteProduct(proId).then((response)=>{
+    tutorHelper.deleteProduct(proId).then(()=>{
       res.redirect('/tutor/tutor-home/students')
     })
   })
@@ -210,7 +207,7 @@ router.get('/tutor-home/students',async(req,res)=>{
      console.log(req.body)
      // let Price=parseInt(products.Price)
      let image=req.files.Image;
-     image.mv('./public/tutor-imags/'+id+'.pdf',(err,done)=>{ //, move cheyth kainjal
+     image.mv('./public/tutor-imags/'+id+'.pdf',(err)=>{ //, move cheyth kainjal
        if (!err){
         res.redirect('http://localhost:3000/tutor/tutor-home/assignment')
  
@@ -224,10 +221,9 @@ router.get('/tutor-home/students',async(req,res)=>{
    })
  })
  router.get('/delete-assignment/:id',(req,res)=>{
-  let user = req.session.user;
   let proId=req.params.id
   console.log(proId);
-  tutorHelper.deleteTopics(proId).then((response)=>{
+  tutorHelper.deleteTopics(proId).then(()=>{
     res.redirect('/tutor/tutor-home/assignment')
   })
 })
@@ -260,7 +256,7 @@ router.post('/tutor-home/notes/add-notes',(req,res)=>{
    console.log(req.body)
    // let Price=parseInt(products.Price)
    let image=req.files.Image;
-   image.mv('./public/tutor-notes/'+id+'.pdf',(err,done)=>{ //, move cheyth kainjal
+   image.mv('./public/tutor-notes/'+id+'.pdf',(err)=>{ //, move cheyth kainjal
      if (!err){
       res.redirect('http://localhost:3000/tutor/tutor-home/notes')
 
@@ -274,16 +270,86 @@ router.post('/tutor-home/notes/add-notes',(req,res)=>{
  })
 })
 router.get('/delete-notes/:id',(req,res)=>{
-  let user = req.session.user;
   let notesId=req.params.id
   console.log(notesId);
-  tutorHelper.deleteNotes(notesId).then((response)=>{
+  tutorHelper.deleteNotes(notesId).then(()=>{
     res.redirect('/tutor/tutor-home/notes')
   })
 })
+router.get('/tutor-home/announcement',(req,res)=>{
+  res.render('tutor/announcement')
+})
+router.post('/tutor-home/announcement',(req,res)=>{
+  tutorHelper.addAnnouncement(req.body).then(()=>{
+    
+    res.redirect('http://localhost:3000/tutor/tutor-home')
+  })
+  
+})
+router.get('/tutor-home/attendance',(req,res)=>{
+ 
+ 
+  
+    // tutorHelper.getAllStudent().then((studentList)=>{
+      // console.log(studentList);
+      // console.log(studentList[0].Date);
+       tutorHelper.getPresentStudents().then((students)=>{
+        console.log('ppppppppppppp',students);
+        if(!students){
+     
+          var presentstudent=[{
+            presentstudent: "a"
+           
+          }]
+       }else{
+        
+        var presentstudent=[{
+          presentstudent: "p"
+         
+        }]
+       }
+        
+        console.log(presentstudent);
+       
+        
+       
+        res.render('tutor/attendance',{students,presentstudent})
 
+       })
+     
+
+    
+      
+
+    // })
+   
+
+
+router.post('/tutor-home/attendance',(req,res)=>{
+ 
+  console.log('-----------------',req.body)
+  tutorHelper.addattendance(req.body.date).then((response)=>{
+    
+    
+    res.json({response})
+   
+
+  })
+  
+  
+    
+    
+   
+
+
+  
+
+})
+
+})
 
 module.exports = router;
+
 
 
 

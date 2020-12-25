@@ -91,6 +91,7 @@
       {{!-- <th scope="col">Actions</th> --}}
      <th>Topic</th>
       <th>File</th>
+      <th>Vedio</th>
       <th>Delete</th>
      
 
@@ -104,13 +105,21 @@
        {{!-- <td> <embed src="/tutor-imags/{{this._id}}.pdf" type=""></td> --}}
        {{!-- <td><img style="height: 50px;width:60px" src="/tutor-imags/{{this._id}}.jpg" alt="" srcset=""></td> --}}
       
-     <td><a style="color: blue;" href="/tutor-notes/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+     <td>
+         <a style="color: blue;" href="/tutor-notes/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a>
+        
+       
+
+          
+    
+     </td>
+     <td>  <a class="" href={{this.link}} >   <i class="link fa fa-youtube-play"  style="font-size: 70px;color:brown" aria-hidden="true"></i></a></td>
     
      
       <td>
       
 
-        <a href="/tutor/delete-notes/{{this._id}}" class="btn btn-danger " onclick="return confirm('are you sure want to delete {{this.Name}}')">Delete</a>
+        <a href="/tutor/delete-notes/{{this._id}}"  class="btn btn-Light  btn btn-outline-danger" onclick="return confirm('are you sure want to delete {{this.Name}}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
       
     </tr>
@@ -151,8 +160,15 @@
 </header>
 
 <style>
-    section {
-        background-repeat: no-repeat;
-    }
+    .link i{
+-webkit-transition: all 0.5s ease;
+
+  transition: all 0.5s ease;
+}
+.link i:hover{
+-webkit-transform: scale(1.1);
+   transform: scale3d(1.1);
+}
+
 </style>
 

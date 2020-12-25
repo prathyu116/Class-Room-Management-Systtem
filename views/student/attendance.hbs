@@ -9,39 +9,46 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar"  > 
             <div class="sidebar-header" >
-                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR  </h3>
+                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi STUDENT  </h3>
             </div>
 
             <ul class="aside list-unstyled components">
                
+              
                 <li>
-                    <a href="/tutor/tutor-home/profile">Profile</a>
-                   
-                   
+                    <a href="">Home</a>
+
                 </li>
-                <li>
-                    <a href="/tutor/tutor-home/students">Students</a>
+                 <li>
+                    <a href="#">Today Task</a>
                 </li>
                 <li>
                     <a href="#">Attendance</a>
                 </li>
                 <li>
-                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
+                    <a href='/student/student-home/assignment'>Assignment</a>
+                </li>
+               
+                   
+               
+                 <li>
+                    <a href="/student/student-home/notes">Notes</a>
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/notes">Notes</a>
+                 <li>
+                    <a href="">Profile</a>
+                   
+                   
                 </li>
-                <li>
-                    <a href="/tutor/tutor-home/announcement">Announcement</a>
+                 <li>
+                    <a href="/student/student-home/announcement">Announcement</a>
+                   
+                   
                 </li>
-                <li>
-                    <a href="/tutor/tutor-home/attendance">Attendance</a>
-                </li>
-                <li>
-                    <a href="#">Event</a>
-                </li>
-                <li>
-                    <a href="#">Photo</a>
+                 <li>
+                    <a href="/student/student-home/attendance">Attendance</a>
+                   
+                   
                 </li>
             </ul>
 
@@ -64,9 +71,10 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class=" nav navbar-nav ml-auto ">
-                              {{#if user}}
+                              {{#if student}}
+                               <h1>{{student.Name}}</h1>
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/tutor/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">{{student.Name}}</a>
                                
                             {{/if}}
                             </li>
@@ -75,18 +83,15 @@
                     </div>
                 </div>
             </nav>
+           
+           <h1>Attendance</h1>
+             Total Days:30 <br>
+           Present: <br>
+           Absent: <br>
+           Percentage: <br>
+           Class-Average :
 
-      <section >
-          <h1>Announcement</h1>
-          ======================
-        {{#each announcement}}
-  		<p>{{this.Description}}</p>
-        
-		  {{/each}}
-
-      </section>
-
-            
+    
         </div>
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->

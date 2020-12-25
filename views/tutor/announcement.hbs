@@ -35,9 +35,6 @@
                     <a href="/tutor/tutor-home/announcement">Announcement</a>
                 </li>
                 <li>
-                    <a href="/tutor/tutor-home/attendance">Attendance</a>
-                </li>
-                <li>
                     <a href="#">Event</a>
                 </li>
                 <li>
@@ -77,18 +74,27 @@
             </nav>
 
       <section >
-          <h1>Announcement</h1>
-          ======================
-        {{#each announcement}}
-  		<p>{{this.Description}}</p>
-        
-		  {{/each}}
+      <h1>Aannouncement</h1>
+<form action="/tutor/tutor-home/announcement" enctype="multipart/form-data" method="POST">
+     <div class="mb-3" style="width: 500px;">
+  <label for="exampleFormControlInput1" class="form-label">Message:</label>
+  <input type="text" name="Message" class="form-control" id="exampleFormControlInput1" >
+</div>
+<div class="mb-3" style="width: 500px;">
+  <label for="exampleFormControlTextarea1" class="form-label">Description:</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Description"></textarea>
+</div>
+					{{!-- <input type="file" name="announcementdetail" placeholder="Details" accept="application/pdf,video/*,image/*" required multiple><br> --}}
 
-      </section>
+	<input type="submit" value="Submit" id="submit">
+</form>
+     
+
+      </section> 
 
             
-        </div>
-    </div>
+       
+    
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -114,7 +120,5 @@
     </header>
 
 <style>
-    section{
-        background-repeat: no-repeat;
-    }
+    
 </style>

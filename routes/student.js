@@ -10,9 +10,9 @@ const varifyLogin=(req,res,next)=>{
   }
 }
 
-var serviceId='	VA78fa3dfbf36775b72869ac68c098fb6d	';
-var accountSID='AC3f24b193be18c30011e153db7b47067e';
-var authToken='958b21c552bde19d8d13fb8def735708';
+var serviceId='	VA977ba045087f70ffa5af380fcc033bc2	';
+var accountSID='ACbd8f3608849dca6cb4c7ce98f3ad388b';
+var authToken='fbd92d89b6423bcf923e82a5a2ac14c9';
 const twilio=require('twilio')(accountSID,authToken)
 
 
@@ -166,6 +166,18 @@ router.get('/student-home/notes',(req,res)=>{
   
 
 })
+router.get('/student-home/announcement',(req,res)=>{
+  tutorHelper.getAnnouncement().then((announcement)=>{
+    res.render("student/announcement", {announcement });
 
+  })
+  // res.render('student/announcement')
+})
+router.get('/student-home/attendance',(req,res)=>{
+  res.render('student/attendance')
+})
+router.get('/student-home/today-task',(req,res)=>{
+  res.render('student/today-task')
+})
 
 module.exports = router;

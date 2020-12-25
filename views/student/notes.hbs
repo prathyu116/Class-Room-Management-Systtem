@@ -29,7 +29,9 @@
                     <a href='/student/student-home/assignment'>Assignment</a>
                 </li>
                 <li>
-                    <a href="#">Announcement</a>
+                    <a href="/student/student-home/announcement">Announcement</a>
+                   
+                   
                 </li>
                
                  <li>
@@ -98,6 +100,7 @@
       {{!-- <th scope="col">Actions</th> --}}
      <th>Topic</th>
       <th>File</th>
+      <th>Vedio</th>
      
      
 
@@ -110,10 +113,11 @@
       <td>{{this.Topic}}</td>
       
       
-      <td><a style="color: blue;" href="/tutor-imags/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a></td>
+      <td><a style="color: blue;" href="/tutor-imags/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a>
+      
+      </td>
+    <td> <a href={{this.link}} >   <i class="fa fa-youtube-play"  style="font-size: 70px;color:brown" aria-hidden="true"></i></a></td>
     
-     
-      <td>
       
 
        

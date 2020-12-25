@@ -19,11 +19,9 @@
                     <a href="">Home</a>
 
                 </li>
-                 <li>
-                    <a href="#">Today Task</a>
-                </li>
+                
                 <li>
-                    <a href="#">Attendance</a>
+                    <a href="/student/student-home/today-task">Today Task</a>
                 </li>
                 <li>
                     <a href='/student/student-home/assignment'>Assignment</a>
@@ -37,6 +35,16 @@
                 <li>
                  <li>
                     <a href="">Profile</a>
+                   
+                   
+                </li>
+                 <li>
+                    <a href="/student/student-home/announcement">Announcement</a>
+                   
+                   
+                </li>
+                 <li>
+                    <a href="/student/student-home/attendance">Attendance</a>
                    
                    
                 </li>
@@ -76,7 +84,10 @@
            
            
 
-     
+      {{#each announcement}}
+  		<p>{{this.Description}}</p>
+        
+		  {{/each}}
             
         </div>
     </div>

@@ -220,4 +220,65 @@ module.exports = {
    
 
   },
+  getAnnouncement:()=>{
+    return new Promise(async(resolve,reject)=>{
+      let announcement = await db.get().collection(collection.ANNOUNCEMENT).find().toArray();
+      resolve(announcement);
+      console.log(announcement);
+
+    })
+
+  },
+  addAnnouncement:(announcement)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection(collection.ANNOUNCEMENT).insertOne(announcement).then((data)=>{
+        resolve(data.ops[0]);
+      
+      })
+    })
+    
+    
+  },
+  addattendance:(date)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection(collection.STUDENT_COLLECTION).updateOne(
+        {},
+  { $set: {"Date":date} },
+  
+      ).then((response)=>{
+        resolve();
+
+      })
+        // db.Price=parseInt(Price)
+        // console.log(Price)
+        // console.log(data.Price);
+  
+       
+
+    
+    
+  })
+
+  },
+  getStudentDetail:(date)=>{
+    return new Promise((resolve, reject) => {
+      db.get()
+        .collection(collection.STUDENT_COLLECTION)
+        .findOne({ date:date })
+        .then((student) => {
+          resolve(student);
+        });
+    });
+
+  },
+  getPresentStudents:()=>{
+    return new Promise(async(resolve,reject)=>{
+    let students=await db.get().collection(collection.STUDENT_COLLECTION).find({ Date: '2020-12-26'}).toArray();
+   
+      resolve(students);
+      console.log(students);
+
+    })
+  }
 }
+//acc-ACbd8f3608849dca6cb4c7ce98f3ad388b,auth--fbd92d89b6423bcf923e82a5a2ac14c9
