@@ -6,7 +6,12 @@ var accountSID='ACbd8f3608849dca6cb4c7ce98f3ad388b';
 var authToken='fbd92d89b6423bcf923e82a5a2ac14c9';
 const twilio=require('twilio')(accountSID,authToken)
 var Razorpay=require('razorpay');
-
+var paypal=require('paypal-rest-sdk')
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AYE4_1iQK-_ahUGwBzTD8TzFgdOdZAgSHUTsG3n5nnfkpRsTCGVxXVIkNrsu1_ZuoYi1ZwDNEiB6f1T-',
+  'client_secret': 'EE2PDJMRakQX_yKrb_UvcbIGdLs5Tib6penMjHEFB4mrbuc9Vsxq_cky3rxg70JXAltYp9HATRc0Hmtc'
+});
 var instance = new Razorpay({
     key_id: 'rzp_test_kDfKK3zMnYvdVZ',
     key_secret: '1ON0EUyK1ZG5y27kup6kMwVN',
@@ -163,6 +168,52 @@ console.log('0000000000000000000000000000000',stassignments);
          
         
     }
+    // create_payment:(amount)=>{
+    //   return new Promise((resolve,reject)=>{
+    //     var create_payment_json = {
+    //       "intent": "sale",
+    //       "payer": {
+    //           "payment_method": "paypal"
+    //       },
+    //       "redirect_urls": {
+    //           "return_url": "http://localhost:3000/student/student-home",
+    //           "cancel_url": "http://cancel.url"
+    //       },
+    //       "transactions": [{
+    //           "item_list": {
+    //               "items": [{
+    //                   "name": "item",
+    //                   "sku": "item",
+    //                   "price": amount,
+    //                   "currency": "USD",
+    //                   "quantity": 1
+    //               }]
+    //           },
+    //           "amount": {
+    //               "currency": "USD",
+    //               "total": amount
+    //           },
+    //           "description": "This is the payment description."
+    //       }]
+    //   };
+    //   paypal.payment.create(create_payment_json, function (error, payment) {
+    //     if (error) {
+    //         throw error;
+    //     } else {
+    //         console.log("Create Payment Response");
+    //         console.log(payment);
+    //         for(let i=0;i<payment.links.length;i++){
+    //           if(payment.links[i].rel==='approval_url'){
+    //             resolve(payment.links[i].href)
+    //           }
+    //         }
+    //     }
+    // });
+      
+
+    //   })
+
+    // }
 
   
    

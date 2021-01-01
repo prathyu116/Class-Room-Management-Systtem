@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var studentHelper=require('../helpers/student-helper')
 var tutorHelper = require("../helpers/tutor-helper");
+var paypal=require('paypal-rest-sdk')
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AYE4_1iQK-_ahUGwBzTD8TzFgdOdZAgSHUTsG3n5nnfkpRsTCGVxXVIkNrsu1_ZuoYi1ZwDNEiB6f1T-',
+  'client_secret': 'EE2PDJMRakQX_yKrb_UvcbIGdLs5Tib6penMjHEFB4mrbuc9Vsxq_cky3rxg70JXAltYp9HATRc0Hmtc'
+});
 const varifyLogin=(req,res,next)=>{
   if(req.session.loggedIn){
     next()
@@ -193,8 +199,45 @@ router.post('/pay-Event',(req,res)=>{
  studentHelper.payment(req.body).then((paymentId)=>{
   if(req.body['payment']==='Paypal'){
     
-      console.log('payyypal');
-    
+   const create_payment_json = {
+      "intent": "sale",
+      "payer": {
+          "payment_method": "paypal"
+      },
+      "redirect_urls": {
+          "return_url": "http://localhost:3000/student/student-home",
+          "cancel_url": "http://cancel.url"
+      },
+      "transactions": [{
+          "item_list": {
+              "items": [{
+                  "name": "item",
+                  "sku": "item",
+                  "price": "200",
+                  "currency": "USD",
+                  "quantity": 1
+              }]
+          },
+          "amount": {
+              "currency": "USD",
+              "total": "200"
+          },
+          "description": "This is the payment description."
+      }]
+  };
+  paypal.payment.create(create_payment_json, function (error, payment) {
+    if (error) {
+        throw error;
+    } else {
+        console.log("Create Payment Response");
+        console.log(payment);
+        for(let i=0;i<payment.links.length;i++){
+          if(payment.links[i].rel==='approval_url'){
+            res.redirect(payment.links[i].href)
+          }
+        }
+    }
+});
   }else{
     studentHelper.generateRazorpay(paymentId,amount).then((response)=>{
       console.log('------------------',response);
