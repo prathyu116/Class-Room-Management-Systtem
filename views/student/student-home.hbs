@@ -84,12 +84,22 @@
            
            
 
-      {{#each announcement}}
-  		<p>{{this.Description}}</p>
+        {{#each events}}
+  		<h3><i class="fa fa-calendar" aria-hidden="true"></i>
+The Event On {{this.Event}} is Conducting @ {{this.Date}} by {{this.Conduct}}</h3>
+ {{#if this.paid}}
+ <div style="padding-left: 200px;">
+ <a href="/student/pay-Event" class="btn btn-outline-primary " >make the  payment for the event</a>
+ </div>
+     
+    {{!-- ?utton  type="button" class="btn btn-outline-primary">Primary</button> --}}
+
+      {{/if}}
         
 		  {{/each}}
             
         </div>
+      
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

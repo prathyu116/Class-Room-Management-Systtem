@@ -5,6 +5,7 @@ module.exports={
     ASSIGNMENT_TOPIC:'assignments',
     SUBMITTED_ASSIGNMENT:'stassignments',
     NOTES_COLLECTIONS:'notes',
-    ANNOUNCEMENT:'announcement'
+    ANNOUNCEMENT:'announcement',
+    EVENTS_COLLECTIONS:'events',
+    PAYMENT_COLLECTION:'paymentDetails'
 }
-//      <th>Photo</th>

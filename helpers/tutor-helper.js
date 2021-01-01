@@ -102,10 +102,7 @@ module.exports = {
   addStudents:(student)=>{
     return new Promise((resolve,reject)=>{
       db.get().collection(collection.STUDENT_COLLECTION).insertOne(student).then((data)=>{
-        // db.Price=parseInt(Price)
-        // console.log(Price)
-        // console.log(data.Price);
-  
+       
         resolve(data.ops[0]);
 
     })
@@ -271,6 +268,16 @@ module.exports = {
     });
 
   },
+  addEvent:(events)=>{
+    return new Promise((resolve,reject)=>{
+      db.get().collection(collection.EVENTS_COLLECTIONS).insertOne(events).then((data)=>{
+       
+        resolve(data.ops[0]);
+
+    })
+    
+  })
+},
   getPresentStudents:()=>{
     return new Promise(async(resolve,reject)=>{
     let students=await db.get().collection(collection.STUDENT_COLLECTION).find({ Date: '2020-12-26'}).toArray();
@@ -280,5 +287,6 @@ module.exports = {
 
     })
   }
+  
 }
 //acc-ACbd8f3608849dca6cb4c7ce98f3ad388b,auth--fbd92d89b6423bcf923e82a5a2ac14c9

@@ -5,6 +5,12 @@ var serviceId='	VA977ba045087f70ffa5af380fcc033bc2';
 var accountSID='ACbd8f3608849dca6cb4c7ce98f3ad388b';
 var authToken='fbd92d89b6423bcf923e82a5a2ac14c9';
 const twilio=require('twilio')(accountSID,authToken)
+var Razorpay=require('razorpay');
+
+var instance = new Razorpay({
+    key_id: 'rzp_test_kDfKK3zMnYvdVZ',
+    key_secret: '1ON0EUyK1ZG5y27kup6kMwVN',
+  });
 
 module.exports={
     // serviceId:'VA677df19ccda8484f48a57b3d064f124a	',
@@ -116,18 +122,47 @@ console.log('0000000000000000000000000000000',stassignments);
           })
 
     },
-    // deleteSubmitAssignment:(proId)=>{
-    //     return new Promise((resolve,reject)=>{
-    //       db.get().collection(collection.SUBMITTED_ASSIGNMENT).removeOne({_id:objectId(proId)}).then((response)=>{
-    //         resolve(response)
-    //     })
-          
-    
-    
-    //     })
-       
-    
-    //   }
+    getEvents:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let Events = await db.get().collection(collection.EVENTS_COLLECTIONS).find().toArray();
+            resolve(Events);
+            console.log(Events);
+      
+          })
+
+    },
+    payment:(paymentDetails)=>{
+        return new Promise((resolve, reject) => {
+            db.get()
+              .collection(collection.PAYMENT_COLLECTION)
+              .insertOne(paymentDetails)
+              .then((response) => {
+                console.log(response.ops[0]);
+                resolve(response.ops[0]._id);
+              });
+          });
+
+    },
+    //key id rzp_test_kDfKK3zMnYvdVZ
+    //key secre 1ON0EUyK1ZG5y27kup6kMwVN
+    generateRazorpay:(paymentId, total)=>{
+        return new Promise((resolve,reject)=>{
+            let response = {};
+            var options = {
+              amount: total,  // amount in the smallest currency unit
+              currency: "INR",
+              receipt:""+ paymentId
+            };
+            instance.orders.create(options, function(err, order) {
+                response.status = true;
+              console.log('+++NEW ORDER+++',order)
+              resolve(order)
+              });
+              // 
+            })
+         
+        
+    }
 
   
    

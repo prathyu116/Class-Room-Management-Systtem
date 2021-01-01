@@ -347,6 +347,20 @@ router.post('/tutor-home/attendance',(req,res)=>{
 })
 
 })
+router.get('/tutor-home/events',(req,res)=>{
+  res.render('tutor/events')
+
+})
+router.post('/tutor-home/events',(req,res)=>{
+   
+  console.log(req.body);
+  tutorHelper.addEvent(req.body).then((response)=>{
+    console.log(response)
+    
+    res.redirect('/tutor/tutor-home/events')
+  })
+
+})
 
 module.exports = router;
 

@@ -101,7 +101,11 @@ router.get('/student-home',(req,res)=>{
   let student = req.session.student;
   console.log(req.session);
   console.log('00000000000',student);
-  res.render("student/student-home",{student});
+  studentHelper.getEvents().then((events)=>{
+    res.render("student/student-home",{student,events});
+
+  })
+
 
 })
 router.get("/logout", (req, res) => {
@@ -179,5 +183,34 @@ router.get('/student-home/attendance',(req,res)=>{
 router.get('/student-home/today-task',(req,res)=>{
   res.render('student/today-task')
 })
+router.get('/pay-Event',(req,res)=>{
+ 
+  res.render('student/pay-Event')
+})
+router.post('/pay-Event',(req,res)=>{
+  let amount=req.body.amount
+ console.log(req.body);
+ studentHelper.payment(req.body).then((paymentId)=>{
+  if(req.body['payment']==='Paypal'){
+    
+      console.log('payyypal');
+    
+  }else{
+    studentHelper.generateRazorpay(paymentId,amount).then((response)=>{
+      console.log('------------------',response);
+      res.json(response)
+     
+      
+    })
+  }
+   
+  
 
+ })
+ 
+})
+router.post('/verify-payment',(req,res)=>{
+  console.log(req.body);
+  
+})
 module.exports = router;
