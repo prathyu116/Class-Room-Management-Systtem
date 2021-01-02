@@ -167,53 +167,54 @@ console.log('0000000000000000000000000000000',stassignments);
             })
          
         
-    }
-    // create_payment:(amount)=>{
-    //   return new Promise((resolve,reject)=>{
-    //     var create_payment_json = {
-    //       "intent": "sale",
-    //       "payer": {
-    //           "payment_method": "paypal"
-    //       },
-    //       "redirect_urls": {
-    //           "return_url": "http://localhost:3000/student/student-home",
-    //           "cancel_url": "http://cancel.url"
-    //       },
-    //       "transactions": [{
-    //           "item_list": {
-    //               "items": [{
-    //                   "name": "item",
-    //                   "sku": "item",
-    //                   "price": amount,
-    //                   "currency": "USD",
-    //                   "quantity": 1
-    //               }]
-    //           },
-    //           "amount": {
-    //               "currency": "USD",
-    //               "total": amount
-    //           },
-    //           "description": "This is the payment description."
-    //       }]
-    //   };
-    //   paypal.payment.create(create_payment_json, function (error, payment) {
-    //     if (error) {
-    //         throw error;
-    //     } else {
-    //         console.log("Create Payment Response");
-    //         console.log(payment);
-    //         for(let i=0;i<payment.links.length;i++){
-    //           if(payment.links[i].rel==='approval_url'){
-    //             resolve(payment.links[i].href)
-    //           }
-    //         }
-    //     }
-    // });
+    },
+    create_payment:(amount)=>{
+      return new Promise((resolve,reject)=>{
+        var create_payment_json = {
+          "intent": "sale",
+          "payer": {
+              "payment_method": "paypal"
+          },
+          "redirect_urls": {
+              "return_url": "http://localhost:3000/student/student-home",
+              "cancel_url": "http://cancel.url"
+          },
+          "transactions": [{
+              "item_list": {
+                  "items": [{
+                      "name": "item",
+                      "sku": "item",
+                      "price": amount,
+                      "currency": "USD",
+                      "quantity": 1
+                  }]
+              },
+              "amount": {
+                  "currency": "USD",
+                  "total": amount
+              },
+              "description": "This is the payment description."
+          }]
+      };
+      paypal.payment.create(create_payment_json, function (error, payment) {
+        if (error) {
+            throw error;
+        } else {
+            console.log("Create Payment Response");
+            console.log(payment);
+            for(let i=0;i<payment.links.length;i++){
+              if(payment.links[i].rel==='approval_url'){
+                
+                resolve(payment.links[i].href)
+              }
+            }
+        }
+    });
       
 
-    //   })
+      })
 
-    // }
+    }
 
   
    

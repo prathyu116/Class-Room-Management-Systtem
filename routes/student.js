@@ -198,46 +198,14 @@ router.post('/pay-Event',(req,res)=>{
  console.log(req.body);
  studentHelper.payment(req.body).then((paymentId)=>{
   if(req.body['payment']==='Paypal'){
+    studentHelper.create_payment(amount).then((LINK)=>{
+      console.log('PPPPPPPPP',LINK);
+      res.json(LINK)
+     
+
+    })
     
-   const create_payment_json = {
-      "intent": "sale",
-      "payer": {
-          "payment_method": "paypal"
-      },
-      "redirect_urls": {
-          "return_url": "http://localhost:3000/student/student-home",
-          "cancel_url": "http://cancel.url"
-      },
-      "transactions": [{
-          "item_list": {
-              "items": [{
-                  "name": "item",
-                  "sku": "item",
-                  "price": "200",
-                  "currency": "USD",
-                  "quantity": 1
-              }]
-          },
-          "amount": {
-              "currency": "USD",
-              "total": "200"
-          },
-          "description": "This is the payment description."
-      }]
-  };
-  paypal.payment.create(create_payment_json, function (error, payment) {
-    if (error) {
-        throw error;
-    } else {
-        console.log("Create Payment Response");
-        console.log(payment);
-        for(let i=0;i<payment.links.length;i++){
-          if(payment.links[i].rel==='approval_url'){
-            res.redirect(payment.links[i].href)
-          }
-        }
-    }
-});
+  
   }else{
     studentHelper.generateRazorpay(paymentId,amount).then((response)=>{
       console.log('------------------',response);
