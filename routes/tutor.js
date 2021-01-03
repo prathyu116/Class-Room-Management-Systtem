@@ -361,6 +361,35 @@ router.post('/tutor-home/events',(req,res)=>{
   })
 
 })
+router.get('/tutor-home/photo',async(req,res)=>{
+ 
+  res.render('tutor/photo')
+
+})
+router.post('/tutor-home/photo',async(req,res)=>{
+ 
+  console.log(req.body)
+  // let studentId = req.session.student._id;
+  // console.log('++++++++++++++++++++++++++++++==',studentId);
+ console.log(req.files.Image) //just console il imgum aa contentum varan
+ tutorHelper.addPhoto(req.body,(id)=>{
+
+   console.log(req.body)
+   // let Price=parseInt(products.Price)
+   let image=req.files.Image;
+   image.mv('./public/photo/'+id+'.jpg',(err,done)=>{ //, move cheyth kainjal
+     if (!err){
+      res.redirect('http://localhost:3000/tutor/tutor-home/photo')
+
+     }
+     else{
+       console.log(err)
+     }
+     
+   })
+ 
+ })
+})
 
 module.exports = router;
 

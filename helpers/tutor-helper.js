@@ -286,7 +286,23 @@ module.exports = {
       console.log(students);
 
     })
+  },
+  addPhoto:(photo,callback)=>{
+    // console.log('0000000000000000000000000000000',stassignments);
+    // // stassignments.studId=objectId(stassignments.studId)
+    // console.log('0000000000000000000000000000000',stassignments);
+    
+            db.get().collection(collection.PHOTO_COLLECTIONS).insertOne(photo).then((data)=>{
+              // db.Price=parseInt(Price)
+              // console.log(Price)
+              // console.log(data.Price);
+        
+              callback(data.ops[0]._id);
+        
+          })
+
   }
   
 }
+
 //acc-ACbd8f3608849dca6cb4c7ce98f3ad388b,auth--fbd92d89b6423bcf923e82a5a2ac14c9

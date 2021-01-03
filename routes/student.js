@@ -107,10 +107,20 @@ router.get('/student-home',(req,res)=>{
   let student = req.session.student;
   console.log(req.session);
   console.log('00000000000',student);
-  studentHelper.getEvents().then((events)=>{
-    res.render("student/student-home",{student,events});
-
+  studentHelper.getPhoto().then((photos)=>{
+    console.log(photos);
+    studentHelper.getEvents().then((events)=>{
+      res.render("student/student-home",{student,events,photos});
+  
+    })
+    
+  
+  
+ 
+    
   })
+  
+  
 
 
 })
@@ -224,4 +234,5 @@ router.post('/verify-payment',(req,res)=>{
   console.log(req.body);
   
 })
+
 module.exports = router;

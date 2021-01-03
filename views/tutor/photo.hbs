@@ -77,13 +77,43 @@
             </nav>
 
       <section >
-          <h1>Announcement</h1>
-          ======================
-        {{#each announcement}}
-  		<p>{{this.Description}}</p>
-        
-		  {{/each}}
+         <div class="row">
+                        <div class="col-md-6">
+                           
+                            <form action="/tutor/tutor-home/photo" method="POST" enctype="multipart/form-data">
+                               {{#if student}}
+                            <input type="text" name="studId" value="{{student._id}}">
+                              {{/if}}
+                                {{!-- enctype="multipart/form-data"> --}}
+                                <label for="">Name:</label>
+                                <input type="text" class="form-control" name="Name" value="">
+                               <br><br>
 
+{{!--                               
+                                <label for="">file:</label>
+                                <input type="file" class="form-control" name="File"  > --}}
+                               
+
+
+                   
+                               <label for="">File:</label><br>
+
+                            <div class="container">
+      <div class="button-wrap">
+          
+        <label class="button" for="upload">Upload File</label>
+        <input id="upload" type="file" name="Image">
+      </div>
+    </div>
+<br><br>
+
+                                <button type="submit" class="btn btn-success mt-5">Save</button>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
       </section>
 
             

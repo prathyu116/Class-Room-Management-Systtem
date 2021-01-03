@@ -136,6 +136,15 @@ console.log('0000000000000000000000000000000',stassignments);
           })
 
     },
+    getPhoto:()=>{
+        return new Promise(async(resolve,reject)=>{
+            let photos = await db.get().collection(collection.PHOTO_COLLECTIONS).find().toArray();
+            resolve(photos);
+            console.log(photos);
+      
+          })
+
+    },
     payment:(paymentDetails)=>{
         return new Promise((resolve, reject) => {
             db.get()
@@ -154,7 +163,7 @@ console.log('0000000000000000000000000000000',stassignments);
         return new Promise((resolve,reject)=>{
             let response = {};
             var options = {
-              amount: total,  // amount in the smallest currency unit
+              amount: total *100,  // amount in the smallest currency unit
               currency: "INR",
               receipt:""+ paymentId
             };
