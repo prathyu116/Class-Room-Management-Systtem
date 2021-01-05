@@ -14,31 +14,32 @@
 
             <ul class="aside list-unstyled components">
                
-                <li>
+                 <li>
                     <a href="/tutor/tutor-home/profile">Profile</a>
                    
                    
                 </li>
                 <li>
-                    <a href="#">Students</a>
+                    <a href="/tutor/tutor-home/students">Students</a>
+                </li>
+                
+                <li>
+                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
                 </li>
                 <li>
-                    <a href="#">Attendance</a>
+                    <a href="/tutor/tutor-home/notes">Notes</a>
                 </li>
                 <li>
-                    <a href="#">Assignments</a>
+                    <a href="/tutor/tutor-home/announcement">Announcement</a>
                 </li>
                 <li>
-                    <a href="#">Notes</a>
+                    <a href="/tutor/tutor-home/attendance">Attendance</a>
                 </li>
                 <li>
-                    <a href="#">Announcement</a>
+                    <a href="/tutor/tutor-home/events">Event</a>
                 </li>
                 <li>
-                    <a href="#">Event</a>
-                </li>
-                <li>
-                    <a href="#">Photo</a>
+                    <a href="/tutor/tutor-home/photo">Photo</a>
                 </li>
             </ul>
 
@@ -88,7 +89,11 @@
 <p>MOB:{{this.Mob}}</p>
 <p>Email:{{this.Email}}</p>
 {{!-- <img style="height: 50px;width:160px;" src="/tutor-imags/{{this._id}}.jpg" alt="" srcset=""> --}}
-<img src="/tutor-imags/{{this._id}}.jpg" class="rounded float-right ml-1" style="margin-top: -400px;height: 50px;width:60px" alt="...">
+
+    <img src="/tutor-imags/{{this._id}}.jpg" class="rounded float-right ml-1" style="margin-top: -400px;height: 200px;width:200px" alt="...">
+    
+
+
 <a href="/tutor/tutor-home/profile/edit-profile/{{this._id}}" class="btn btn-primary">Edit</a>
 
 {{/each }}

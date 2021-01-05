@@ -1,53 +1,50 @@
-
-
-
-
 <header>
 
 
     <div class="wrapper">
         <!-- Sidebar Holder -->
-        <nav id="sidebar"  > 
-            <div class="sidebar-header" >
-                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR  </h3>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3> <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi TUTOR </h3>
             </div>
 
             <ul class="aside list-unstyled components">
-               
-                <li>
+
+                  <li>
                     <a href="/tutor/tutor-home/profile">Profile</a>
                    
                    
                 </li>
                 <li>
-                    <a href="#">Students</a>
+                    <a href="/tutor/tutor-home/students">Students</a>
+                </li>
+                
+                <li>
+                    <a href='/tutor/tutor-home/assignment'>Assignment</a>
                 </li>
                 <li>
-                    <a href="#">Attendance</a>
+                    <a href="/tutor/tutor-home/notes">Notes</a>
                 </li>
                 <li>
-                    <a href="#">Assignments</a>
+                    <a href="/tutor/tutor-home/announcement">Announcement</a>
                 </li>
                 <li>
-                    <a href="#">Notes</a>
+                    <a href="/tutor/tutor-home/attendance">Attendance</a>
                 </li>
                 <li>
-                    <a href="#">Announcement</a>
+                    <a href="/tutor/tutor-home/events">Event</a>
                 </li>
                 <li>
-                    <a href="#">Event</a>
-                </li>
-                <li>
-                    <a href="#">Photo</a>
+                    <a href="/tutor/tutor-home/photo">Photo</a>
                 </li>
             </ul>
 
-            
+
         </nav>
 
         <!-- Page Content Holder -->
-        <div id="content" >
-            
+        <div id="content">
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -57,15 +54,17 @@
                         <span></span>
                         <span></span>
                     </button>
-                   
+
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class=" nav navbar-nav ml-auto ">
-                              {{#if user}}
+                            {{#if user}}
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/tutor/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
-                               
-                            {{/if}}
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger"
+                                    href="/tutor/logout" style="color: black;font-size:20px"
+                                    onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">Logout</a>
+
+                                {{/if}}
                             </li>
 
                         </ul>
@@ -73,75 +72,61 @@
                 </div>
             </nav>
 
-     
-      
-<section>
-    <div class="row ">
-        <a href="/tutor/tutor-home/students/add-students" class="btn btn-success ml-auto mr-5 mt-3  ">Add student</a>
-    </div>
-    <div class="container">
-        <table class="table mt-5" id="productsTable" style="text-align: center;">
-  <thead style="    background-color: teal;">
-    <tr>
-{{!-- <th s      cope="col">NO</th> --}}
-    
-      {{!-- <th scope="col">Actions</th> --}}
-       <th >Rollno</th>
-     <th>Name</th>
-      {{!-- <th>Gender</th> --}}
-     
- 
-     {{!-- <th>Date Of Birth</th>
-         <th>Phone</th>
-     <th>E-mail</th> --}}
-     <th >Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-      {{#each students}}
-    <tr>
-         {{!-- <td>{{this.Rollno}}</td> --}}
-  
-         <td><a href="/tutor/view-each-stusent/{{this._id}}">{{this.Rollno}}</a></td>
-         <td><a href="/tutor/view-each-stusent/{{this._id}}">{{this.Name}}</a></td>
-      {{!-- <td>{{this.Gender}}</td> --}}
-      
-     
-      {{!-- <td>{{this.DOB}}</td>
-      <td>{{this.Phone}}</td>
-      <td>{{this.Email}}</td> --}}
-     
-      
-      
-      
-      <td>
-        <a href="/tutor/edit-student/{{this._id}}" class="btn btn-Light  btn btn-outline-primary"><i class="fa fa-pencil" aria-hidden="true"></i>
 
-</a>  
 
-        <a href="/tutor/delete-product/{{this._id}}" class="btn btn-Light  btn btn-outline-danger" onclick="return confirm('are you sure want to delete {{this.Name}}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            <section>
+                <div class="row ">
+                    <a href="/tutor/tutor-home/students/add-students" class="btn btn-success ml-auto mr-5 mt-3  ">Add
+                        student</a>
+                </div>
+                <div class="container">
+                    <table class="table mt-5" id="productsTable" style="text-align: center;">
+                        <thead style="    background-color: teal;">
+                            <tr>
+                                {{!-- <th s cope="col">NO</th> --}}
 
-      </td>
-    </tr>
-    {{/each}}
-    
-  </tbody>
-</table>
-    </div>
-</section>
-{{!-- <script>
-  $(document).ready( function () {
-    $('#productsTable').DataTable();
-} );
-</script> --}}
-{{!-- <script>
-  $(document).ready( function () {
-    $('#productsTable').DataTable();
-} );
-</script> --}}
-     
+                                {{!-- <th scope="col">Actions</th> --}}
+                                <th>Rollno</th>
+                                <th>Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each students}}
+                            <tr>
+                              
 
-          
+                                <td><a href="/tutor/view-each-stusent/{{this._id}}">{{this.Rollno}}</a></td>
+                                <td><a href="/tutor/view-each-stusent/{{this._id}}">{{this.Name}}</a></td>
+                               
+
+
+
+                                <td>
+                                    <a href="/tutor/edit-student/{{this._id}}"
+                                        class="btn btn-Light  btn btn-outline-primary"><i class="fa fa-pencil"
+                                            aria-hidden="true"></i>
+
+                                    </a>
+
+                                    <a href="/tutor/delete-product/{{this._id}}"
+                                        class="btn btn-Light  btn btn-outline-danger"
+                                        onclick="return confirm('are you sure want to delete {{this.Name}}')"><i
+                                            class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                </td>
+                            </tr>
+                            {{/each}}
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+           
+
+
+
         </div>
     </div>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -158,16 +143,12 @@
         crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript">
+     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
-            
-      
+        });
     </script>
-    </header>
-
-
-
+</header>

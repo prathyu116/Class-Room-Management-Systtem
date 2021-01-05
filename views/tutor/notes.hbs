@@ -16,11 +16,9 @@
 
                 </li>
                 <li>
-                    <a href="#">Students</a>
+                    <a href="/tutor/tutor-home/students">Students</a>
                 </li>
-                <li>
-                    <a href="#">Attendance</a>
-                </li>
+
                 <li>
                     <a href='/tutor/tutor-home/assignment'>Assignment</a>
                 </li>
@@ -28,14 +26,18 @@
                     <a href="/tutor/tutor-home/notes">Notes</a>
                 </li>
                 <li>
-                    <a href="#">Announcement</a>
+                    <a href="/tutor/tutor-home/announcement">Announcement</a>
                 </li>
                 <li>
-                    <a href="#">Event</a>
+                    <a href="/tutor/tutor-home/attendance">Attendance</a>
                 </li>
                 <li>
-                    <a href="#">Photo</a>
+                    <a href="/tutor/tutor-home/events">Event</a>
                 </li>
+                <li>
+                    <a href="/tutor/tutor-home/photo">Photo</a>
+                </li>
+            </ul>
             </ul>
 
 
@@ -75,61 +77,65 @@
 
             <section>
 
-<h1>Notes</h1>
-===============
- <div class="container mt-0 ">
-     <div class="row ">
-        <a href="/tutor/tutor-home/notes/add-notes" class="btn btn-success ml-auto mr-5 mt-3  ">Add Notes</a>
-    </div>
- 
-                    
-                <table  class="table mt-5 align-middle" id="productsTable">
-  <thead style="    background-color: teal; padding:100px 0">
-    <tr>
-{{!-- <th s      cope="col">NO</th> --}}
-    
-      {{!-- <th scope="col">Actions</th> --}}
-     <th>Topic</th>
-      <th>File</th>
-      <th>Vedio</th>
-      <th>Delete</th>
-     
 
-    </tr>
-  </thead>
-  <tbody>
-      {{#each notes}}
-    <tr>
-     
-      <td>{{this.Topic}}</td>
-       {{!-- <td> <embed src="/tutor-imags/{{this._id}}.pdf" type=""></td> --}}
-       {{!-- <td><img style="height: 50px;width:60px" src="/tutor-imags/{{this._id}}.jpg" alt="" srcset=""></td> --}}
-      
-     <td>
-         <a style="color: blue;" href="/tutor-notes/{{this._id}}.pdf" >{{this.Topic}}_.pdf(download)</a>
-        
-       
+                <div class="container mt-0 ">
+                    <h1>Notes</h1>
+                    ===============
+                    <div class="row ">
+                        <a href="/tutor/tutor-home/notes/add-notes" class="btn btn-success ml-auto mr-5 mt-3  ">Add
+                            Notes</a>
+                    </div>
 
-          
-    
-     </td>
-     <td>  <a class="" href={{this.link}} >   <i class="link fa fa-youtube-play"  style="font-size: 70px;color:brown" aria-hidden="true"></i></a></td>
-    
-     
-      <td>
-      
 
-        <a href="/tutor/delete-notes/{{this._id}}"  class="btn btn-Light  btn btn-outline-danger" onclick="return confirm('are you sure want to delete {{this.Name}}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <table class="table mt-5 align-middle" id="productsTable">
+                        <thead style="    background-color: teal; padding:100px 0">
+                            <tr>
+                               
+                                <th>Topic</th>
+                                <th>File</th>
+                                <th>Vedio</th>
+                                <th>Delete</th>
 
-      
-    </tr>
-     {{/each }}
-    
-    
-  </tbody>
-</table>
- 
-</section>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each notes}}
+                            <tr>
+
+                                <td>{{this.Topic}}</td>
+                              
+
+                                <td>
+                                    <a style="color: blue;"
+                                        href="/tutor-notes/{{this._id}}.pdf">{{this.Topic}}_.pdf(download)</a>
+
+
+
+
+
+                                </td>
+                                <td> <a class="" href={{this.link}}> <i class="link fa fa-youtube-play"
+                                            style="font-size: 70px;color:brown" aria-hidden="true"></i></a></td>
+
+
+                                <td>
+
+
+                                    <a href="/tutor/delete-notes/{{this._id}}"
+                                        class="btn btn-Light  btn btn-outline-danger"
+                                        onclick="return confirm('are you sure want to delete {{this.Name}}')"><i
+                                            class="fa fa-trash" aria-hidden="true"></i></a>
+
+
+                            </tr>
+                            {{/each }}
+
+
+                        </tbody>
+                    </table>
+
+            </section>
 
 
 
@@ -160,15 +166,14 @@
 </header>
 
 <style>
-    .link i{
--webkit-transition: all 0.5s ease;
+    .link i {
+        -webkit-transition: all 0.5s ease;
 
-  transition: all 0.5s ease;
-}
-.link i:hover{
--webkit-transform: scale(1.1);
-   transform: scale3d(1.1);
-}
+        transition: all 0.5s ease;
+    }
 
+    .link i:hover {
+        -webkit-transform: scale(1.1);
+        transform: scale3d(1.1);
+    }
 </style>
-

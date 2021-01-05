@@ -113,14 +113,17 @@ router.post('/tutor-home/profile/edit-profile/:id',(req,res)=>{
 })
 router.get('/tutor-home/students',async(req,res)=>{
   let user = req.session.user;
+  let students=await tutorHelper.getAllStudent(req.params.id).then((students)=>{
+    res.render('tutor/view-students',{user,tutor:true,students})
+
+  })
   
 
 })
   router.get('/tutor-home/students/add-students',async(req,res)=>{
-    // let user = req.session.user;
-    // let profile=await tutorHelper.getProfileDetails(req.params.id)
-    // console.log(profile);
-    res.render('tutor/add-students',{tutor:true})
+    let user = req.session.user;
+    
+    res.render('tutor/add-students',{tutor:true,user})
   })
   router.post('/tutor-home/students/add-students',(req,res)=>{
    
@@ -277,7 +280,8 @@ router.get('/delete-notes/:id',(req,res)=>{
   })
 })
 router.get('/tutor-home/announcement',(req,res)=>{
-  res.render('tutor/announcement')
+  let user=req.session.user
+  res.render('tutor/announcement',{user,tutor:true})
 })
 router.post('/tutor-home/announcement',(req,res)=>{
   tutorHelper.addAnnouncement(req.body).then(()=>{
