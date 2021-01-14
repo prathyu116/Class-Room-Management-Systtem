@@ -23,6 +23,53 @@ const twilio=require('twilio')(accountSID,authToken)
 
 
 router.get('/login', function(req, res, next) {
+  // res.render('student/stlogin')
+ 
+  
+   
+  if(req.session.loggedIn){
+    res.redirect("student-home");
+
+  }
+  else{
+    res.render("student/stlogin",{'logginErr':req.session.logginErr});
+    req.session.logginErr=false
+
+
+
+
+  
+  }
+  
+  
+  
+  
+  
+  
+});
+router.post("/login", (req, res) => {
+  console.log(req.body);
+  studentHelper.doLogin(req.body).then((response) => {
+    console.log(response);
+    if (response.status) {
+      req.session.loggedIn = true;
+      req.session.student = response.student;
+      let student = req.session.student;
+      console.log(student);
+      res.redirect("student-home");  
+        // res.send('hiiiiiiii')
+
+
+
+     
+    } else {
+      req.session.logginErr=true
+      res.redirect("/student/login");
+    }
+  });
+});
+
+router.get('/loginotp', function(req, res, next) {
   if(req.session.loggedIn){
     res.redirect('http://localhost:3000/student/student-home')
   }else{
@@ -41,6 +88,7 @@ router.get('/login', function(req, res, next) {
   
   
 });
+
 router.post('/otp-send',(req,res)=>{
   // res.session.studentNum = req.body.phone
   // res.session.studentNum = req.body.phone

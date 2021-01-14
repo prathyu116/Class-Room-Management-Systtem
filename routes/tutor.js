@@ -320,22 +320,16 @@ router.get('/tutor-home/attendance',(req,res)=>{
         res.render('tutor/attendance',{students,presentstudent})
 
        })
-     
-
-    
-      
-
-    // })
-   
 
 
 router.post('/tutor-home/attendance',(req,res)=>{
+  console.log('pppppppppppppppppppppppp',req.body);
  
-  console.log('-----------------',req.body)
+  
   tutorHelper.addattendance(req.body.date).then((response)=>{
     
     
-    res.json({response})
+    res.json(response)
    
 
   })

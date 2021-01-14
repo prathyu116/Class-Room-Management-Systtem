@@ -18,6 +18,33 @@ var instance = new Razorpay({
   });
 
 module.exports={
+  doLogin: (userData) => {
+    let loginStatus = false;
+    let response = {};
+    console.log(userData);
+    return new Promise(async (resolve, reject) => {
+      let student = await db.get().collection(collection.STUDENT_LOGIN).findOne({ Name: userData.Name });
+      if (student) {
+        db.get()
+          .collection(collection.STUDENT_LOGIN)
+          .findOne({ Password: userData.Password })
+          .then((status) => {
+            if (status) {
+              console.log("suucusfully logined");
+              response.student = student;
+              response.status = true;
+              resolve(response);
+            } else {
+              console.log("logine failed - password incorrect");
+              resolve({ status: false });
+            }
+          });
+      } else {
+        console.log("failed-user not found");
+        resolve({ status: false });
+      }
+    });
+  },
     // serviceId:'VA677df19ccda8484f48a57b3d064f124a	',
     // accountSID:'ACb4e558db93af0d4fabe6e699dc041613',
     // authToken:'34a6b35bc1abeca0eb534092438cf0c9'

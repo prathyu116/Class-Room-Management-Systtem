@@ -8,5 +8,6 @@ module.exports={
     ANNOUNCEMENT:'announcement',
     EVENTS_COLLECTIONS:'events',
     PAYMENT_COLLECTION:'paymentDetails',
-    PHOTO_COLLECTIONS:'photo'
+    PHOTO_COLLECTIONS:'photo',
+    STUDENT_LOGIN:'stlogin'
 }

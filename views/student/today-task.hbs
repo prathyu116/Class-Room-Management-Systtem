@@ -1,25 +1,25 @@
- {{!-- {{>tutor-header}}  --}}
- 
+{{!-- {{>tutor-header}} --}}
+
 
 
 <header>
 
 
-    <div class="wrapper" style="position: fixed;" >
+    <div class="wrapper" style="position: fixed;">
         <!-- Sidebar Holder -->
-        <nav id="sidebar"  > 
-            <div class="sidebar-header" >
-                <h3>  <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi STUDENT  </h3>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3> <i class="fa fa-user" style="color: black;font-size:40px"></i> Hi STUDENT </h3>
             </div>
 
             <ul class="aside list-unstyled components">
-               
-              
+
+
                 <li>
                     <a href="">Home</a>
 
                 </li>
-                 <li>
+                <li>
                     <a href="#">Today Task</a>
                 </li>
                 <li>
@@ -28,31 +28,31 @@
                 <li>
                     <a href='/student/student-home/assignment'>Assignment</a>
                 </li>
-               
-                   
-               
-                 <li>
+
+
+
+                <li>
                     <a href="/student/student-home/notes">Notes</a>
                 </li>
                 <li>
-                 <li>
+                <li>
                     <a href="">Profile</a>
-                   
-                   
+
+
                 </li>
-                 <li>
+                <li>
                     <a href="/student/student-home/announcement">Announcement</a>
-                   
-                   
+
+
                 </li>
             </ul>
 
-            
+
         </nav>
 
         <!-- Page Content Holder -->
-        <div id="content" >
-            
+        <div id="content">
+
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
@@ -62,39 +62,41 @@
                         <span></span>
                         <span></span>
                     </button>
-                   
+
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class=" nav navbar-nav ml-auto ">
-                              {{#if student}}
-                               <h1>{{student.Name}}</h1>
+                            {{#if student}}
+                            <h1>{{student.Name}}</h1>
                             <li class="link nav-item active">
-                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger" href="/student/logout" style="color: black;font-size:20px"  onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">{{student.Name}}</a>
-                               
-                            {{/if}}
+                                <a class="nav-link btn btn-outline-danger rounded-pill border border-danger"
+                                    href="/student/logout" style="color: black;font-size:20px"
+                                    onclick="return confirm('{{user.name}}!!!! are you sure want to logout ')">{{student.Name}}</a>
+
+                                {{/if}}
                             </li>
 
                         </ul>
                     </div>
                 </div>
             </nav>
-           
-           <h1>Today Task</h1>
 
-     <p></p>
-     
-<video id="myVideo" width="320" height="176" controls>
-  <source src="/mov_bbb.mp4" type="video/mp4">
-  <source src="mov_bbb.ogg" type="video/ogg">
- 
+            <h1>Today Task</h1>
+
+            <p></p>
+
+            <video id="myVideo" width="320" height="176" controls>
+                <source src="/mov_bbb.mp4" type="video/mp4">
+                <source src="mov_bbb.ogg" type="video/ogg">
 
 
-</video>
-          <input type="hidden"  id="date" value="">
+
+            </video>
+            <input type="hidden" id="date" value="">
 
         </div>
     </div>
-    
+
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -109,43 +111,44 @@
         crossorigin="anonymous"></script>
 
 
-    {{!-- <script type="text/javascript">
+    {{!--
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
         }); --}}
-       <script>
-var vid = document.getElementById("myVideo");
+        <script>
+            var vid = document.getElementById("myVideo");
 
 
 
 vid.onplay = function() {
-    
-   
+
+
     var today = new Date();
 
 document.getElementById("date").value = today.getFullYear() + '-' + ('0' + (today.getMonth() + 1)).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
-var x=document.getElementById("date").value 
+var x=document.getElementById("date").value
 alert(x)
 
-    
-     
-     
-    
+
+
+
+
      $.ajax({
-        
-          url:'/tutor/tutor-home/attendance',
+
+                url:'/tutor/tutor-home/attendance',
             method:'post',
           data:{date:x},
-          
-        
+
+
           success:(response)=>{
-                             alert('present')
-                              
-         
-     }
+                alert('present')
+
+
+            }
          
          
        })
@@ -154,10 +157,10 @@ alert(x)
 };
 
     </script>
-    </header>
+</header>
 
 <style>
-    section{
+    section {
         background-repeat: no-repeat;
     }
 </style>
